@@ -32,28 +32,33 @@ Google Play 콘솔에 등록할 공개 URL을 GitHub Pages로 호스팅합니다
 
 ## 2. GitHub Pages 배포
 
-`.github/workflows/deploy-pages.yml` 이 **자동으로 배포**합니다.
-`main` 또는 `claude/google-play-privacy-policy-r6960e` 에 푸시하면 워크플로가 돌면서
-Pages 가 꺼져 있으면 켜고(`actions/configure-pages` 의 `enablement: true`),
-`index.html` 하나만 사이트로 올립니다. Settings 에서 손댈 것은 없습니다.
+### 최초 1회 — 사람이 눌러야 하는 스위치
+
+**Settings → Pages → Build and deployment → Source 를 `GitHub Actions` 로 변경**
+
+Pages 를 처음 켜는 것은 저장소 관리자 권한이 필요해서 워크플로의 `GITHUB_TOKEN` 으로는 못 합니다
+(`Create Pages site failed. Error: Resource not accessible by integration`).
+이 스위치만 한 번 바꾸면 그 뒤로는 손댈 일이 없습니다.
+
+### 그 다음부터는 자동
+
+`.github/workflows/deploy-pages.yml` 이 `main` 브랜치 푸시마다 배포합니다.
+Actions 탭에서 수동 실행(`Run workflow`)도 가능합니다. 게시되는 파일은 `index.html` 하나이고,
+README 와 `docs/` 는 저장소 문서이므로 사이트에 올라가지 않습니다.
 
 ```
 https://nursingxr.github.io/med-vocab-policy/
 ```
 
-README 와 `docs/` 는 저장소 문서이므로 사이트에 게시하지 않습니다.
-
-> 워크플로가 권한 문제로 실패한다면 (조직 정책이 `GITHUB_TOKEN` 을 읽기 전용으로 제한한 경우)
-> **Settings → Actions → General → Workflow permissions** 를 `Read and write` 로 바꾸고
-> 워크플로를 다시 실행하세요. 그래도 안 되면 **Settings → Pages → Source** 를
-> `GitHub Actions` 로 직접 지정하면 됩니다.
+> `workflow_dispatch` 로 수동 실행하려면 워크플로가 **기본 브랜치**에 있어야 합니다.
+> Settings → General → Default branch 를 `main` 으로 바꿔 두세요.
 
 ### 배포 후 자가 점검
 
 - [ ] 시크릿 창(로그아웃 상태)에서 URL이 열린다 — Google 심사자는 비로그인 상태로 접근합니다
 - [ ] 모바일 화면에서 가로 스크롤 없이 읽힌다
 - [ ] 페이지 제목에 "개인정보처리방침"이 보인다
-- [ ] 제14조의 이메일이 `ped.simulation@gmail.com` 으로 보인다
+- [ ] 제14조에 `Jacob Kim` / `ped.simulation@gmail.com` 이 보인다
 
 ## 3. Play 콘솔 등록 위치
 
