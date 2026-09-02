@@ -17,18 +17,31 @@ Google Play 콘솔에 등록할 공개 URL을 GitHub Pages로 호스팅합니다
 
 | 항목 | 값 |
 |---|---|
-| 개발자명 | `Nursing XR` — Play 콘솔의 개발자 이름과 **문자열이 일치**해야 합니다 |
+| 개인정보처리자 | 주식회사 널싱엑스알 (사업자등록번호 `524-81-02626`) |
+| 본사 | 충청남도 아산시 배방읍 희망로 46번길, 충남콘텐츠기업지원센터 403호 |
+| 기업부설연구소 | 서울특별시 성동구 왕십리로 222, 한양대학교 융합교육관 901호 |
 | 개인정보 보호책임자 | `Jacob Kim` (제14조) |
-| 문의 이메일 | `ped.simulation@gmail.com` (머리말·제9조·제14조·바닥글 4곳) |
+| 문의 이메일 | `young@nursing-xr.com` |
+| 앱 개발자명 (Play 콘솔) | Play 콘솔의 개발자 이름과 **문자열이 일치**해야 합니다 |
 | 공고일 / 시행일 | `2026년 9월 2일` — 실제 공개일과 다르면 `index.html` 안 4곳을 고치세요 |
+
+### 아직 비어 있는 항목 — `class="todo"` 로 검색
+
+| 위치 | 항목 |
+|---|---|
+| 제7조 위탁 표 | **AI 제공사 법인명** — 예: `OpenAI, L.L.C.` / `Anthropic PBC` / `Google LLC` |
+| 제7조 위탁 표 | **제공사 API 데이터 보존 정책 URL** — 예: `https://openai.com/policies/…` |
+
+`mt-app` 백엔드가 어느 제공사의 API를 호출하는지 확인해서 채우세요.
+「개인정보 보호법」상 국외 이전은 **수탁자를 특정**해야 하므로 "생성형 AI 모델 제공사" 같은
+포괄 표현으로는 부족합니다.
 
 ### 백엔드와 대조가 필요한 값
 
-방침에 적은 아래 두 가지는 `mt-app` 백엔드를 직접 확인하지 못하고 통상값으로 기재했습니다.
-**방침 내용이 실제 동작과 다르면 그 자체가 위반**이므로 한 번 대조해 주세요.
-
 - **보유 기간** (제5조) — 문의 내역 1년, 서버 접속 로그 3개월로 명시
 - **비밀번호 일방향 암호화** (제12조) — bcrypt/argon2 등으로 해시 저장하는지
+- **계정 삭제 엔드포인트** — 제9조가 앱 내 삭제를 주 경로로 안내합니다.
+  `DELETE /auth/me` 계열 엔드포인트가 백엔드에 있어야 문구가 사실이 됩니다.
 
 ## 2. GitHub Pages 배포
 
@@ -43,10 +56,11 @@ Pages 를 처음 켜는 것은 저장소 관리자 권한이 필요해서 워크
 ### 그 다음부터는 자동
 
 `.github/workflows/deploy-pages.yml` 이 **기본 브랜치** 푸시마다 배포합니다.
-게시되는 파일은 `index.html` 하나이고, README 와 `docs/` 는 저장소 문서라 사이트에 올라가지 않습니다.
+게시되는 파일은 아래 두 개이고, README 와 `docs/` 는 저장소 문서라 사이트에 올라가지 않습니다.
 
 ```
-https://nursingxr.github.io/med-vocab-policy/
+https://nursingxr.github.io/med-vocab-policy/                      (개인정보처리방침)
+https://nursingxr.github.io/med-vocab-policy/delete-account.html   (계정 삭제 요청)
 ```
 
 > **기본 브랜치를 `main` 으로 바꿔 두세요** (Settings → General → Default branch).
@@ -61,7 +75,8 @@ https://nursingxr.github.io/med-vocab-policy/
 - [ ] 시크릿 창(로그아웃 상태)에서 URL이 열린다 — Google 심사자는 비로그인 상태로 접근합니다
 - [ ] 모바일 화면에서 가로 스크롤 없이 읽힌다
 - [ ] 페이지 제목에 "개인정보처리방침"이 보인다
-- [ ] 제14조에 `Jacob Kim` / `ped.simulation@gmail.com` 이 보인다
+- [ ] 제14조에 `Jacob Kim` / `young@nursing-xr.com` / 사업자등록번호가 보인다
+- [ ] `delete-account.html` 이 로그인 없이 열린다
 
 ## 3. Play 콘솔 등록 위치
 
@@ -70,18 +85,18 @@ https://nursingxr.github.io/med-vocab-policy/
 | 앱 콘텐츠 → **개인정보처리방침** | `https://nursingxr.github.io/med-vocab-policy/` |
 | 스토어 등재정보 → 개인정보처리방침 URL | 위와 동일 |
 | 앱 콘텐츠 → **데이터 안전** | `docs/play-data-safety.md` 참고 |
-| 앱 콘텐츠 → **계정 삭제 요청 URL** | 아래 4번 참고 |
+| 앱 콘텐츠 → **앱 액세스** · 스토어 등재정보 문안 | `med-vocab` 저장소의 `docs/play-console-listing.md` |
+| 앱 콘텐츠 → **계정 삭제 요청 URL** | `https://nursingxr.github.io/med-vocab-policy/delete-account.html` |
 
 ---
 
-## 4. 남은 과제 — 계정 삭제 경로 (Play 정책 필수)
+## 4. 남은 과제 — 앱 내 계정 삭제 기능
 
-Google Play는 **앱 안에서 계정을 만들 수 있는 앱**에 대해 두 가지를 모두 요구합니다.
+Google Play(데이터 안전 · 계정 삭제 요청 URL)와 App Store 심사 가이드라인 5.1.1(v)는
+계정 생성이 가능한 앱에 **앱 내 삭제 기능**을 요구합니다.
 
-1. **앱 내 계정 삭제 경로** — 현재 `med-vocab` 앱의 *설정* 화면에는 탈퇴 메뉴가 없습니다. (미구현)
-2. **웹에서 접근 가능한 계정 삭제 요청 URL** — 로그인 없이 열리는 페이지여야 합니다.
-
-이 방침의 **제9조**는 이메일 기반 삭제 요청 절차를 명시하고 있어 *방침 문서로서의* 요건은 충족하지만,
-위 1·2번은 별도 작업입니다. 백엔드에 `DELETE /auth/me` 계열 엔드포인트를 추가하고
-설정 화면에 "회원 탈퇴"를 붙이는 것이 정석이며, 그전까지는 최소한 2번(삭제 요청 전용 페이지)을
-이 저장소에 추가해 콘솔에 등록해야 심사에서 지적받지 않습니다.
+- **웹 삭제 요청 URL** — `delete-account.html` 로 해결. 로그인 없이 열립니다. ✅
+- **앱 내 삭제 UI** — `med-vocab` 저장소에 구현했습니다 (설정 > 계정 > 계정 삭제, 비밀번호 재확인).
+- **백엔드 엔드포인트** — ⚠️ **아직 없습니다.** `mt-app` 에 `DELETE /auth/me` 계열이 들어가야
+  앱 내 삭제가 실제로 동작하고, 제9조 문구가 사실이 됩니다.
+  이 저장소의 방침을 **공개 배포하기 전에** 백엔드부터 확인하세요.

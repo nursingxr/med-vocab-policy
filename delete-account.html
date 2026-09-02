@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>계정 삭제 요청 — Nursing XR</title>
+<meta name="description" content="Nursing XR 앱의 계정과 학습 기록 삭제를 요청하는 방법을 안내합니다. 앱 내 삭제 기능과 이메일 요청 절차, 삭제 항목과 처리 기한을 확인할 수 있습니다.">
+<meta name="robots" content="index,follow">
+<style>
+  :root{
+    --bg:#f7f8fa; --surface:#ffffff; --text:#1b2028; --text-soft:#4b5563;
+    --muted:#6b7280; --border:#e3e6ec; --accent:#2f6fed; --accent-soft:#eef3fe;
+    --warn-bg:#fff7e6; --warn-border:#f0c36d; --warn-text:#7a5300;
+    --code-bg:#eef0f4;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#12151a; --surface:#181c23; --text:#e6e9ef; --text-soft:#b7bec9;
+      --muted:#8b93a1; --border:#2a303a; --accent:#7aa5ff; --accent-soft:#1b2536;
+      --warn-bg:#2b2313; --warn-border:#7a5f22; --warn-text:#e8c877;
+      --code-bg:#232833;
+    }
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0; background:var(--bg); color:var(--text);
+    font-family:"Pretendard","Pretendard Variable",-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic","Noto Sans KR",system-ui,sans-serif;
+    font-size:16px; line-height:1.75; word-break:keep-all; overflow-wrap:anywhere;
+  }
+  .wrap{max-width:780px; margin:0 auto; padding:32px 20px 72px}
+  header.doc{
+    background:var(--surface); border:1px solid var(--border); border-radius:14px;
+    padding:24px 22px; margin-bottom:28px;
+  }
+  h1{font-size:1.6rem; line-height:1.35; margin:0 0 6px; letter-spacing:-.01em}
+  .app-name{color:var(--muted); font-size:.95rem; margin:0 0 16px}
+  dl.meta{display:grid; grid-template-columns:auto 1fr; gap:6px 14px; margin:0; font-size:.9rem}
+  dl.meta dt{color:var(--muted); white-space:nowrap}
+  dl.meta dd{margin:0; color:var(--text-soft)}
+  nav.toc{
+    background:var(--surface); border:1px solid var(--border); border-radius:14px;
+    padding:18px 22px; margin-bottom:32px;
+  }
+  nav.toc h2{font-size:.95rem; margin:0 0 10px; color:var(--muted); font-weight:600; letter-spacing:.02em}
+  nav.toc ol{margin:0; padding-left:1.35em; font-size:.94rem; columns:2; column-gap:28px}
+  nav.toc li{margin:3px 0; break-inside:avoid}
+  nav.toc a{color:var(--text-soft); text-decoration:none}
+  nav.toc a:hover{color:var(--accent); text-decoration:underline}
+  @media (max-width:560px){ nav.toc ol{columns:1} }
+  section{margin:0 0 34px; scroll-margin-top:16px}
+  h2{font-size:1.13rem; margin:0 0 12px; padding-bottom:8px; border-bottom:2px solid var(--border); letter-spacing:-.005em}
+  h3{font-size:1rem; margin:22px 0 8px; color:var(--text)}
+  p{margin:0 0 12px; color:var(--text-soft)}
+  ul,ol{margin:0 0 12px; padding-left:1.3em; color:var(--text-soft)}
+  li{margin:5px 0}
+  strong{color:var(--text); font-weight:600}
+  a{color:var(--accent)}
+  .tablewrap{overflow-x:auto; -webkit-overflow-scrolling:touch; margin:0 0 14px; border:1px solid var(--border); border-radius:10px; background:var(--surface)}
+  table{border-collapse:collapse; width:100%; min-width:520px; font-size:.9rem}
+  th,td{padding:10px 12px; text-align:left; vertical-align:top; border-bottom:1px solid var(--border)}
+  th{background:var(--accent-soft); color:var(--text); font-weight:600; white-space:nowrap}
+  tbody tr:last-child td{border-bottom:none}
+  td{color:var(--text-soft)}
+  .note{
+    background:var(--surface); border:1px solid var(--border); border-left:3px solid var(--accent);
+    border-radius:0 10px 10px 0; padding:14px 16px; margin:0 0 14px; font-size:.92rem;
+  }
+  .note p:last-child{margin-bottom:0}
+  .todo{
+    background:var(--warn-bg); border:1px dashed var(--warn-border); color:var(--warn-text);
+    padding:1px 7px; border-radius:5px; font-size:.9em; font-weight:600; white-space:nowrap;
+  }
+  code{background:var(--code-bg); padding:2px 6px; border-radius:5px; font-size:.88em;
+    font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; color:var(--text)}
+  footer.doc{margin-top:44px; padding-top:20px; border-top:1px solid var(--border); font-size:.86rem; color:var(--muted)}
+  @media print{
+    body{background:#fff; color:#000; font-size:11pt}
+    .wrap{max-width:none; padding:0}
+    nav.toc{display:none}
+    header.doc,.note,.tablewrap{border-color:#bbb}
+    section{page-break-inside:auto}
+    h2{page-break-after:avoid}
+  }
+
+  .btn{display:inline-block; background:var(--accent); color:#fff; text-decoration:none;
+    padding:11px 20px; border-radius:9px; font-weight:600; font-size:.95rem; margin:4px 0}
+  .btn:hover{filter:brightness(1.08)}
+  .muted{color:var(--muted); font-size:.88rem}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="doc">
+  <h1>계정 삭제 요청</h1>
+  <p class="app-name">Nursing XR — 의학용어 학습 게임 (<code>com.nursingxr.med_vocab</code>)</p>
+  <dl class="meta">
+    <dt>개인정보처리자</dt><dd>주식회사 널싱엑스알</dd>
+    <dt>문의</dt><dd><a href="mailto:young@nursing-xr.com">young@nursing-xr.com</a></dd>
+    <dt>관련 방침</dt><dd><a href="./">개인정보처리방침 제9조</a></dd>
+  </dl>
+</header>
+
+<p>Nursing XR 계정과 계정에 연결된 학습 기록의 삭제를 요청하실 수 있습니다.
+아래 두 가지 방법 중 하나를 이용해 주십시오. <strong>로그인 없이 이 페이지를 이용할 수 있습니다.</strong></p>
+
+<section id="in-app">
+  <h2>방법 1 (권장). 앱 안에서 직접 삭제</h2>
+  <p>앱에 로그인할 수 있다면 이 방법이 가장 빠릅니다. 본인 확인이 즉시 이루어지므로 대기 기간이 없습니다.</p>
+  <ol>
+    <li>Nursing XR 앱을 열고 로그인합니다.</li>
+    <li><strong><em>설정</em> &gt; <em>계정</em> &gt; <em>계정 삭제</em></strong>를 선택합니다.</li>
+    <li>삭제되는 항목 안내를 확인합니다.</li>
+    <li>본인 확인을 위해 <strong>현재 비밀번호를 다시 입력</strong>합니다.</li>
+    <li>확인 즉시 계정이 비활성화되고 모든 기기에서 로그아웃됩니다.</li>
+  </ol>
+  <div class="note">
+    <p>소속 교육기관의 LMS를 통해 가입하여 비밀번호가 없는 계정은 이메일 인증 절차로 본인 확인을 대신합니다.
+    앱 안내에 따라 진행해 주십시오.</p>
+  </div>
+</section>
+
+<section id="by-email">
+  <h2>방법 2. 이메일로 요청</h2>
+  <p>앱을 이미 삭제했거나 로그인할 수 없는 경우 이메일로 요청해 주십시오.</p>
+  <ol>
+    <li>제목을 <strong>[Nursing XR] 계정 삭제 요청</strong>으로 작성합니다.</li>
+    <li>본문에 <strong>가입에 사용한 이메일 주소</strong>를 적습니다.</li>
+    <li><strong>반드시 가입하신 이메일 계정에서</strong> 보내주십시오. 본인 확인에 사용됩니다.</li>
+  </ol>
+  <p><a class="btn" href="mailto:young@nursing-xr.com?subject=%5BNursing%20XR%5D%20%EA%B3%84%EC%A0%95%20%EC%82%AD%EC%A0%9C%20%EC%9A%94%EC%B2%AD&amp;body=%EA%B0%80%EC%9E%85%20%EC%9D%B4%EB%A9%94%EC%9D%BC%20%EC%A3%BC%EC%86%8C%3A%20">삭제 요청 메일 작성하기</a></p>
+  <p class="muted">버튼이 동작하지 않으면 <strong>young@nursing-xr.com</strong> 으로 직접 보내주십시오.</p>
+</section>
+
+<section id="what">
+  <h2>삭제되는 정보</h2>
+  <ul>
+    <li>계정 정보 — 이름, 이메일 주소, 비밀번호, 소속 기관, 연결된 초대 코드</li>
+    <li>학습 기록 전체 — 게임 세션, 문항별 답안, 오답 기록, 학습 통계, 배지 획득 이력</li>
+    <li>서버에 저장된 인증 토큰 (모든 기기에서 로그아웃 처리)</li>
+    <li>제출하신 문의 · 오류 신고 내용 중 개인을 식별할 수 있는 부분</li>
+  </ul>
+
+  <h2>삭제되지 않는 정보</h2>
+  <ul>
+    <li><strong>개인을 식별할 수 없도록 가공된 통계 데이터</strong> — 예: 특정 의학용어의 전체 정답률.
+      특정 개인과 다시 연결될 수 없습니다.</li>
+    <li><strong>관계 법령에 보존 의무가 있는 기록</strong> — 해당 법정 기간 동안 분리 보관한 뒤 파기합니다.</li>
+    <li><strong>소속 교육기관이 이미 내려받은 사본</strong> — 초대 코드로 기관에 연결된 경우
+      교수자·관리자가 학습 현황을 Excel 파일 등으로 내려받았을 수 있습니다. 그 사본은 해당 기관이
+      <strong>독자적인 개인정보처리자</strong>로서 자신의 책임 아래 보유하므로
+      <strong>회사가 회수하거나 삭제할 수 없습니다.</strong>
+      이 사본의 삭제는 소속 교육기관에 직접 요청하셔야 합니다.</li>
+  </ul>
+</section>
+
+<section id="when">
+  <h2>처리 기한</h2>
+  <div class="tablewrap">
+  <table>
+    <thead><tr><th>단계</th><th>기간</th></tr></thead>
+    <tbody>
+      <tr><td>① 본인 확인</td>
+          <td>앱 내 삭제는 비밀번호 재확인으로 <strong>즉시</strong>.<br>
+              이메일 요청은 접수일로부터 <strong>최대 30일</strong>(통상 영업일 기준 7일 이내)</td></tr>
+      <tr><td>② 확인 완료 후 파기 실행</td><td><strong>5일 이내</strong></td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="note">
+    <p><strong>앱을 삭제하는 것만으로는 계정이 삭제되지 않습니다.</strong>
+    기기에 저장된 인증 토큰과 환경 설정은 앱 삭제와 함께 지워지지만, 서버의 계정과 학습 기록은 남아 있습니다.
+    완전한 삭제를 원하시면 위 절차를 이용해 주십시오.</p>
+  </div>
+</section>
+
+<footer class="doc">
+  <p>주식회사 널싱엑스알 · 사업자등록번호 524-81-02626<br>
+  충청남도 아산시 배방읍 희망로 46번길, 충남콘텐츠기업지원센터 403호<br>
+  문의 <a href="mailto:young@nursing-xr.com">young@nursing-xr.com</a> ·
+  <a href="./">개인정보처리방침</a></p>
+</footer>
+
+</div>
+</body>
+</html>

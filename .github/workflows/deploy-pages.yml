@@ -38,12 +38,13 @@ jobs:
       - name: Configure Pages
         uses: actions/configure-pages@v5
 
-      # 공개할 파일은 개인정보처리방침 본문 하나뿐이다.
+      # 공개하는 것은 개인정보처리방침과 계정 삭제 요청 페이지 둘뿐이다.
+      # 계정 삭제 페이지는 Play 콘솔의 "계정 삭제 요청 URL" 로 등록한다.
       # README·데이터 안전 가이드는 저장소 문서이므로 사이트에 올리지 않는다.
       - name: Assemble site
         run: |
           mkdir -p _site
-          cp index.html _site/index.html
+          cp index.html delete-account.html _site/
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
