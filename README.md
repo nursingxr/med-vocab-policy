@@ -42,16 +42,19 @@ Pages 를 처음 켜는 것은 저장소 관리자 권한이 필요해서 워크
 
 ### 그 다음부터는 자동
 
-`.github/workflows/deploy-pages.yml` 이 `main` 브랜치 푸시마다 배포합니다.
-Actions 탭에서 수동 실행(`Run workflow`)도 가능합니다. 게시되는 파일은 `index.html` 하나이고,
-README 와 `docs/` 는 저장소 문서이므로 사이트에 올라가지 않습니다.
+`.github/workflows/deploy-pages.yml` 이 **기본 브랜치** 푸시마다 배포합니다.
+게시되는 파일은 `index.html` 하나이고, README 와 `docs/` 는 저장소 문서라 사이트에 올라가지 않습니다.
 
 ```
 https://nursingxr.github.io/med-vocab-policy/
 ```
 
-> `workflow_dispatch` 로 수동 실행하려면 워크플로가 **기본 브랜치**에 있어야 합니다.
-> Settings → General → Default branch 를 `main` 으로 바꿔 두세요.
+> **기본 브랜치를 `main` 으로 바꿔 두세요** (Settings → General → Default branch).
+> Source 를 `GitHub Actions` 로 지정하면 GitHub 이 `github-pages` 환경을 만드는데,
+> 이 환경은 **기본 브랜치에서 출발한 배포만 허용**합니다.
+> 워크플로에 `if: github.ref_name == github.event.repository.default_branch` 를 걸어 두었으므로
+> 기본 브랜치가 아닌 곳에서는 조용히 건너뛰고, 기본 브랜치를 바꿔도 워크플로는 손댈 필요가 없습니다.
+> (이 가드가 없으면 스텝을 하나도 밟지 못한 채 실패합니다 — Actions 로그에 스텝이 안 찍히면 그 증상입니다.)
 
 ### 배포 후 자가 점검
 
