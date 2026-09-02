@@ -13,48 +13,47 @@ Google Play 콘솔에 등록할 공개 URL을 GitHub Pages로 호스팅합니다
 
 ---
 
-## 1. 배포 전에 반드시 채워야 할 항목
+## 1. 기재 정보
 
-`index.html`에서 **노란색 점선 배지**로 표시된 곳이 미입력 항목입니다. 검색어: `class="todo"`
+| 항목 | 값 |
+|---|---|
+| 개발자명 | `Nursing XR` — Play 콘솔의 개발자 이름과 **문자열이 일치**해야 합니다 |
+| 개인정보 보호책임자 | `Jacob Kim` (제14조) |
+| 문의 이메일 | `ped.simulation@gmail.com` (머리말·제9조·제14조·바닥글 4곳) |
+| 공고일 / 시행일 | `2026년 9월 2일` — 실제 공개일과 다르면 `index.html` 안 4곳을 고치세요 |
 
-| 위치 | 항목 | 비고 |
-|---|---|---|
-| 제14조 | `〈성명 입력〉` — 개인정보 보호책임자 성명 | 「개인정보 보호법」 제31조상 성명·직책·연락처 공개가 필요합니다. 개인 개발자라면 본인 성명을 적으면 됩니다. |
+### 백엔드와 대조가 필요한 값
 
-### 함께 확인할 값
+방침에 적은 아래 두 가지는 `mt-app` 백엔드를 직접 확인하지 못하고 통상값으로 기재했습니다.
+**방침 내용이 실제 동작과 다르면 그 자체가 위반**이므로 한 번 대조해 주세요.
 
-- **문의 이메일** — 현재 `nursingxr2026@gmail.com`(Play 개발자 계정 메일)로 되어 있습니다.
-  개인 메일 노출이 부담되면 `privacy@…` 같은 별도 주소로 교체하세요.
-  `index.html` 안 4곳(머리말·제9조·제14조·바닥글), 문자열로는 8회 등장합니다.
-- **개발자명** — Play 콘솔의 개발자 이름과 **문자열이 일치**해야 합니다. 현재 `Nursing XR`.
-- **공고일 / 시행일** — 현재 `2026년 9월 2일`. 실제 공개일로 맞추세요. `index.html` 안에 4회 등장합니다.
-- **보유 기간** — 문의 내역 1년, 접속 로그 3개월로 명시했습니다. 백엔드(FastAPI)의 실제 보존 설정과
-  다르면 둘 중 하나를 맞춰야 합니다. 방침이 실제와 다르면 그 자체가 위반입니다.
-- **비밀번호 일방향 암호화** (제12조) — 백엔드가 bcrypt/argon2 등으로 해시 저장하는지 확인하세요.
-
----
+- **보유 기간** (제5조) — 문의 내역 1년, 서버 접속 로그 3개월로 명시
+- **비밀번호 일방향 암호화** (제12조) — bcrypt/argon2 등으로 해시 저장하는지
 
 ## 2. GitHub Pages 배포
 
-1. GitHub → 이 저장소 → **Settings → Pages**
-2. **Source**: `Deploy from a branch`
-3. **Branch**: `main` / `/ (root)` → **Save**
-4. 1~2분 뒤 아래 URL로 공개됩니다.
+`.github/workflows/deploy-pages.yml` 이 **자동으로 배포**합니다.
+`main` 또는 `claude/google-play-privacy-policy-r6960e` 에 푸시하면 워크플로가 돌면서
+Pages 가 꺼져 있으면 켜고(`actions/configure-pages` 의 `enablement: true`),
+`index.html` 하나만 사이트로 올립니다. Settings 에서 손댈 것은 없습니다.
 
 ```
 https://nursingxr.github.io/med-vocab-policy/
 ```
 
-Jekyll 처리가 필요 없는 단일 HTML이므로 추가 설정은 없습니다.
+README 와 `docs/` 는 저장소 문서이므로 사이트에 게시하지 않습니다.
+
+> 워크플로가 권한 문제로 실패한다면 (조직 정책이 `GITHUB_TOKEN` 을 읽기 전용으로 제한한 경우)
+> **Settings → Actions → General → Workflow permissions** 를 `Read and write` 로 바꾸고
+> 워크플로를 다시 실행하세요. 그래도 안 되면 **Settings → Pages → Source** 를
+> `GitHub Actions` 로 직접 지정하면 됩니다.
 
 ### 배포 후 자가 점검
 
 - [ ] 시크릿 창(로그아웃 상태)에서 URL이 열린다 — Google 심사자는 비로그인 상태로 접근합니다
 - [ ] 모바일 화면에서 가로 스크롤 없이 읽힌다
 - [ ] 페이지 제목에 "개인정보처리방침"이 보인다
-- [ ] `class="todo"` 배지가 하나도 남아 있지 않다
-
----
+- [ ] 제14조의 이메일이 `ped.simulation@gmail.com` 으로 보인다
 
 ## 3. Play 콘솔 등록 위치
 

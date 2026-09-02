@@ -1,0 +1,50 @@
+name: Deploy privacy policy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+      - claude/google-play-privacy-policy-r6960e
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# 동시에 여러 배포가 겹치지 않도록 하되, 진행 중인 배포는 취소하지 않는다.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # Pages 가 아직 켜져 있지 않으면 API 로 활성화한다 (build_type: workflow).
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+        with:
+          enablement: true
+
+      # 공개할 파일은 개인정보처리방침 본문 하나뿐이다.
+      # README·데이터 안전 가이드는 저장소 문서이므로 사이트에 올리지 않는다.
+      - name: Assemble site
+        run: |
+          mkdir -p _site
+          cp index.html _site/index.html
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
